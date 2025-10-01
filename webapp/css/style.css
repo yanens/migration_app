@@ -1,0 +1,308 @@
+/* ===== Modern Minimalist TreeTable Styles ===== */
+
+/* TreeTable Container */
+.customTreeTable {
+    --primary-color: #0070f0;
+    --primary-hover: #0050c0;
+    --background-light: #f8f9fa;
+    --border-light: #e0e0e0;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 4px 16px rgba(0, 112, 240, 0.15);
+    --radius-sm: 6px;
+    --radius-md: 8px;
+}
+
+/* Table Container */
+.customTreeTable .sapUiTableCtrl {
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+}
+
+/* Table Header - Modern Minimalist */
+.customTreeTable .sapUiTableCol {
+    background: linear-gradient(135deg, #f8fafc 0%, #e8f4ff 100%);
+    border-bottom: 1px solid var(--border-light);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: none;
+    letter-spacing: -0.01em;
+}
+
+.customTreeTable .sapUiTableColCell {
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+}
+
+/* Table Rows - Clean Design */
+.customTreeTable .sapUiTableTr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.customTreeTable .sapUiTableTr:hover {
+    background-color: #fafbfc !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-light);
+}
+
+/* Selected Row - Subtle Highlight */
+.customTreeTable .sapUiTableRowSel {
+    background: linear-gradient(90deg, #f0f8ff 0%, #ffffff 100%) !important;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* Table Cells */
+.customTreeTable .sapUiTableTd {
+    padding: 0.875rem 1.25rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Tree Structure Icons - Modern */
+.customTreeTable .sapUiTableTreeIcon {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    margin-right: 0.5rem;
+}
+
+.customTreeTable .sapUiTableTreeIcon:hover {
+    color: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+/* Expand/Collapse Icons */
+.customTreeTable .sapUiTableTreeIcon:before {
+    content: "▶";
+    font-family: "SAP-icons";
+    font-weight: 400;
+}
+
+.customTreeTable .sapUiTableTreeIcon.node-expanded:before {
+    content: "▼";
+}
+
+/* ===== Modern Button Styles ===== */
+
+/* Base Button Styles */
+.fetchBapiInfoButton,
+.editButton {
+    background: #ffffff !important;
+    border: 1.5px solid var(--border-light) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius-md) !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    min-width: 120px !important;
+    height: 40px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button Hover States */
+.fetchBapiInfoButton:hover .sapMBtnInner,
+.editButton:hover .sapMBtnInner {
+    background: #f8fafc !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Button Active States */
+.fetchBapiInfoButton:active .sapMBtnInner,
+.editButton:active .sapMBtnInner {
+    background: #f0f8ff !important;
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 112, 240, 0.2);
+}
+
+/* Button Focus States */
+.fetchBapiInfoButton:focus .sapMBtnInner,
+.editButton:focus .sapMBtnInner {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: 1px !important;
+}
+
+/* Button Inner Elements */
+.fetchBapiInfoButton .sapMBtnInner,
+.editButton .sapMBtnInner {
+    background: transparent !important;
+    border: none !important;
+    border-radius: inherit !important;
+    font-weight: inherit !important;
+    color: inherit !important;
+    transition: inherit !important;
+}
+
+/* Button Content */
+.fetchBapiInfoButton .sapMBtnContent,
+.editButton .sapMBtnContent {
+    color: inherit !important;
+    font-weight: inherit !important;
+    font-size: inherit !important;
+}
+
+/* ===== Tree Structure & Layout ===== */
+
+/* Tree Indentation */
+.customTreeTable .sapUiTableTreeIndent {
+    border-left: 1px solid #e8e8e8;
+    margin-left: 0.5rem;
+}
+
+/* Toolbar Styling */
+.customTreeTable ~ .sapUiTableExtension {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+/* ===== Disabled States ===== */
+
+.selectDisabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.selectDisabled .sapMSelectArrow {
+    display: none;
+}
+
+/* ===== Responsive Design ===== */
+
+@media (max-width: 768px) {
+    .customTreeTable .sapUiTableColCell,
+    .customTreeTable .sapUiTableTd {
+        padding: 0.75rem 1rem;
+    }
+    
+    .customTreeTable {
+        font-size: 0.85rem;
+    }
+    
+    .fetchBapiInfoButton,
+    .editButton {
+        min-width: 100px !important;
+        height: 36px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* ===== Zebra Striping - Subtle ===== */
+
+.customTreeTable .sapUiTableTr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.customTreeTable .sapUiTableTr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* ===== Scrollbar Styling ===== */
+
+.customTreeTable ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.customTreeTable ::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 3px;
+}
+
+.customTreeTable ::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.customTreeTable ::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* ===== Loading & Empty States ===== */
+
+.customTreeTable .sapUiTableLoading {
+    opacity: 0.7;
+}
+
+.customTreeTable .sapUiTableEmpty {
+    background: #f8f9fa;
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.9rem;
+}
+
+/* ===== Error States ===== */
+
+.customTreeTable .sapUiTableError {
+    border: 1px solid #ff6b6b;
+    background: #fff5f5;
+}
+
+/* ===== Modern Focus Indicators ===== */
+
+.customTreeTable .sapUiTableRowHvr {
+    box-shadow: inset 0 0 0 1px var(--primary-color);
+}
+
+/* ===== Animation Enhancements ===== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.customTreeTable .sapUiTableTr {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ===== High Contrast Mode Support ===== */
+
+@media (prefers-contrast: high) {
+    .customTreeTable {
+        --border-light: #000000;
+        --text-primary: #000000;
+    }
+    
+    .customTreeTable .sapUiTableCol {
+        background: #ffffff;
+        border-bottom: 2px solid #000000;
+    }
+}
+
+/* ===== Dark Mode Support ===== */
+
+@media (prefers-color-scheme: dark) {
+    .customTreeTable {
+        --primary-color: #4dabf7;
+        --background-light: #1a1a1a;
+        --border-light: #333;
+        --text-primary: #ffffff;
+        --text-secondary: #aaa;
+    }
+    
+    .customTreeTable .sapUiTableCtrl {
+        background-color: #2d2d2d;
+    }
+    
+    .customTreeTable .sapUiTableCol {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    }
+    
+    .fetchBapiInfoButton,
+    .editButton {
+        background: #2d2d2d !important;
+        border-color: #444 !important;
+        color: #ffffff !important;
+    }
+}

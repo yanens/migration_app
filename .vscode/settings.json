@@ -1,0 +1,50 @@
+{
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "debug.onTaskErrors": "debugAnyway",
+    "explorer.confirmDelete": false,
+    "editor.semanticTokenColorCustomizations": {
+        "[Default Dark+]": {
+            "rules": {
+                "property.mandatory:xml": {
+                    "bold": true
+                },
+                "string.i18n:xml": {
+                    "italic": true
+                }
+            }
+        },
+        "[Default Light+]": {
+            "rules": {
+                "property.mandatory:xml": {
+                    "bold": true
+                },
+                "string.i18n:xml": {
+                    "italic": true
+                }
+            }
+        },
+        "[Default High Contrast]": {
+            "rules": {
+                "property.mandatory:xml": {
+                    "bold": true
+                },
+                "string.i18n:xml": {
+                    "italic": true
+                }
+            }
+        }
+    },
+    "npm.enableRunFromFolder": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": { "source": "PowerShell", "icon": "terminal-powershell", "args": ["-ExecutionPolicy", "Bypass"] }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "explorer.confirmDragAndDrop": false,
+    "sap.ux.applicationModeler.disableMigrationPrompt": true,
+    "sap.ux.codeValidation": {
+        "xml": { "idNaming": false },
+        "javascript": { "idNaming": false }
+    },
+    "ui5.plugin.linter.TagAttributeLinter.enabled": false,
+    "eslint.validate": []
+}

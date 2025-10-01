@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZY_MIGRATION_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="BAPIINFO" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bapiname"/>
+                </Key>
+                <Property Name="Bapiname" Type="Edm.String" Nullable="false" MaxLength="120" sap:unicode="false" sap:label="Object Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Bapitext" Type="Edm.String" MaxLength="74" sap:unicode="false" sap:label="Short text" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Length" Type="Edm.Int32" sap:unicode="false" sap:label="LENGTH" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="JsonText" Type="Edm.Binary" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZY_MIGRATION_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="BAPIINFOSet" EntityType="ZY_MIGRATION_SRV.BAPIINFO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://vhcalhdbdb.dummy.nodomain:50000/sap/opu/odata/sap/ZY_MIGRATION_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://vhcalhdbdb.dummy.nodomain:50000/sap/opu/odata/sap/ZY_MIGRATION_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

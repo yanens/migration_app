@@ -1,0 +1,137 @@
+<mvc:View controllerName="migrationapp.controller.Main"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:table="sap.ui.table"
+    xmlns:rowmodes="sap.ui.table.rowmodes"
+    xmlns:upload="sap.ui.unified"
+    xmlns="sap.m">
+    <Page id="mainPage" title="{i18n>title}">
+        <content>
+            <VBox id="productsContainer" class="sapUiSmallMarginBottom" fitContainer="true">
+                <HBox id="bapiInputContainer" class="sapUiSmallMarginBottom" alignItems="Center" justifyContent="Center">
+                    <Input
+                        id="bapiNameInput"
+                        placeholder="{i18n>input.bapiName.placeholder}"
+                        width="500px">
+                    </Input>
+                    <Button
+                        id="fetchBapiInfoButton"
+                        text="{i18n>button.fetchBapiInfo}"
+                        press="onFetchBAPIInfoButtonPress"/>
+                </HBox>
+                <HBox id="bapiTaskContainer" class="sapUiSmallMarginBottom" alignItems="Center" justifyContent="Left">
+                    <Text text="{i18n>text.taskType}" class="sapUiSmallMarginEnd"/>
+                    <Input
+                        id="taskTypeInput"
+                        width="50px"
+                        class="sapUiSmallMarginEnd">
+                    </Input>
+                    <Text text="{i18n>text.taskNumber}" class="sapUiSmallMarginEnd"/>
+                    <Input
+                        id="taskNumberInput"
+                        width="100px"
+                        class="sapUiSmallMarginEnd">
+                    </Input>
+                </HBox>
+                <Text id="bapiDescriptionText" text="{i18n>text.bapiDescription}"/>
+                <table:TreeTable
+                    id="componentsTreeTable"
+                    class="customTreeTable sapUiSizeCompact"
+                    rows="{
+                        path: '/zcomponents',
+                        parameters: { arrayNames:['zcomponents'] }
+                    }"
+                    width="100%"
+                    toggleOpenState="onTreeTableToggleOpenState"
+                    rowSelectionChange="onTreeTableRowSelectionChange"
+                    rowsUpdated="onTreeTableRowsUpdated"
+                    enableSelectAll="false">
+                    <table:rowMode>
+                        <rowmodes:Interactive
+                            id="treeTableRowMode"
+                            minRowCount="10"
+                            rowCount="25" />
+                    </table:rowMode>
+                    <table:extension>
+                        <OverflowToolbar id="treeTableToolbar" style="Clear">
+                            <Title id="componentsTitle" text="{i18n>treeTable.title}"/> 
+                            <ToolbarSpacer id="toolbarSpacer"/>
+                            <upload:FileUploader
+                                id="fileUploader"
+                                width="400px"
+                                placeholder="{i18n>fileUploader.placeholder}"
+                                change="onFileUploaderChange" />
+                            <Button id="editButton" text="{i18n>button.edit}" press="onEditButtonPress"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column id="nodeNameColumn" width="auto">
+                            <Label id="nodeNameLabel" text="{i18n>column.nodeName}"/>
+                            <table:template>
+                                <Text id="nodeNameText" text="{znodename}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="nodeKindColumn" width="auto">
+                            <Label id="nodeKindLabel" text="{i18n>column.nodeKind}"/>
+                            <table:template>
+                                <Text id="nodeKindText" 
+                                    text="{path: 'znodekind', formatter: '.onFormatNodeKind'}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="nodeStructureColumn" width="auto">
+                            <Label id="nodeStructureLabel" text="{i18n>column.nodeStructure}"/>
+                            <table:template>
+                                <Text id="nodeStructureText" text="{znodestructure}"
+                                    wrapping="false"
+                                    maxLines="1"
+                                    width="100%"
+                                    tooltip="{znodestructure}">
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" shrinkFactor="1" />
+                                    </layoutData>
+                                </Text>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="dataTypeColumn" width="auto">
+                            <Label id="dataTypeLabel" text="{i18n>column.dataType}"/>
+                            <table:template>
+                                <Text id="dataTypeText" 
+                                    text="{path: 'znodetype', formatter: '.onFormatNodeType'}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="descriptionColumn" width="auto">
+                            <Label id="descriptionLabel" text="{i18n>column.description}"/>
+                            <table:template>
+                                <Text id="descriptionText" text="{ztext}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="addFieldColumn" width="auto">
+                            <Label id="addFieldLabel" text="{i18n>column.addField}" textAlign="Center" />
+                            <table:template>
+                                <Button
+                                    icon="sap-icon://add"
+                                    press=".onOpenMultiSelectDialog"
+                                    enabled="{= !${zcomponents} || ${zcomponents}.length === 0 }"
+                                    class="{= !${zcomponents} || ${zcomponents}.length === 0 ? '' : 'selectDisabled'} }"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="relatedFieldColumn" width="auto">
+                            <Label id="relatedFieldLabel" text="{i18n>column.relatedField}"/>
+                            <table:template>
+                                <Text id="relatedFieldText" text="{relatedfield}" 
+                                    wrapping="false"
+                                    maxLines="1"
+                                    width="100%"
+                                    tooltip="{relatedfield}">
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" shrinkFactor="1" />
+                                    </layoutData>
+                                </Text>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:TreeTable>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
