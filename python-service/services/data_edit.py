@@ -41,7 +41,16 @@ class DataProcessor:
         self.result = self._edit_data()
         print("Data successfully processed in Python backend")
     
-    def _edit_data(self):
+    def _edit_data(self) -> Dict[str, Any]:
+        """
+        Main data editing method that processes and combines component and Excel data.
+        
+        Returns:
+            Dictionary containing the processed nested JSON structure
+            
+        Raises:
+            ValueError: If either component data or processed Excel data is not available
+        """
         if self.components_df.empty or self.processed_excel_df.empty:
             raise ValueError("Either components_df or processed_excel_df is not available")
         else:
@@ -49,27 +58,36 @@ class DataProcessor:
             result = self._build_nested_json(self.components_df)
             return result
             
-    def _build_nested_json(self, df, parent_name="", current_depth=0):
+    def _build_nested_json(self, df: pd.DataFrame, parent_name: str = "", current_depth: int = 0) -> Dict[str, Any]:
         """
-        递归构建嵌套JSON结构，支持任意深度
+        Recursively build nested JSON structure with support for arbitrary depth.
+        
+        Args:
+            df: DataFrame containing component data
+            parent_name: Name of the parent node for hierarchical structure
+            current_depth: Current recursion depth for tracking hierarchy levels
+            
+        Returns:
+            Dictionary representing the nested JSON structure
         """
         result = {}
         
-        # 获取当前层级的节点
+        # Get nodes at current level
         if parent_name == "":
-            # 顶级节点
+            # Top-level nodes
             current_nodes = df[df['zparent'] == '']
         else:
-            # 子节点
+            # Child nodes
             current_nodes = df[df['zparent'] == parent_name]
         
         for _, node in current_nodes.iterrows():
             node_name = node['znodename']
             
             if node['has_children']:
-                # 有子节点，递归构建
+                # Node has children, recursively build structure
                 result[node_name] = self._build_nested_json(df, node_name, current_depth + 1)
             else:
+                # Leaf node, populate with Excel data if related field exists
                 if node['relatedfield']:
                     result[node_name] = self.processed_excel_df[node['relatedfield']].tolist() if node.get(
                         'relatedfield') and node['relatedfield'] in self.processed_excel_df.columns else [""] * self.lines
@@ -101,18 +119,18 @@ class DataProcessor:
         except Exception as e:
             raise ValueError(f"Failed to convert data to DataFrame: {str(e)}")
     
-    def _process_excel_data(self, ) -> None:
+    def _process_excel_data(self) -> None:
         """
         Process Excel data and perform necessary transformations.
         
-        This method can be extended to include specific Excel data processing logic
-        such as data validation, cleaning, or integration with component data.
+        This method converts raw Excel data into a structured DataFrame
+        and handles data validation and cleaning operations.
         """
         if not self.excel_data or len(self.excel_data) == 0:
             return
         
         try:
-            # Example: Create DataFrame from Excel data
+            # Create DataFrame from Excel data
             # Assuming first row contains headers
             headers = self.excel_data[0]
             rows = self.excel_data[1:]
@@ -122,7 +140,7 @@ class DataProcessor:
             # Store processed Excel data
             self.processed_excel_df = excel_df
             
-            # Example: Print basic info about the Excel data
+            # Print basic info about the Excel data
             print(f"Processed Excel data with {len(excel_df)} rows and {len(excel_df.columns)} columns")
             
         except Exception as e:
@@ -158,3 +176,12 @@ class DataProcessor:
             "column_count": len(self.processed_excel_df.columns),
             "columns": list(self.processed_excel_df.columns)
         }
+    
+    def get_processing_result(self) -> Dict[str, Any]:
+        """
+        Get the final processing result containing the nested JSON structure.
+        
+        Returns:
+            Dictionary containing the processed nested JSON data structure
+        """
+        return self.result
